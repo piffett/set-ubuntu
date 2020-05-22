@@ -66,6 +66,7 @@ if has("autocmd")
 	autocmd FileType cpp         setlocal sw=4 sts=4 ts=4 noet
 	autocmd FileType rb          setlocal sw=2 sts=2 ts=2 et
 	autocmd FileType f           setlocal sw=2 sts=2 ts=2 et
+	autocmd FileType sh          setlocal sw=2 sts=2 ts=2 et
 endif
 
 

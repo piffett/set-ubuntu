@@ -1,5 +1,7 @@
 #! /bin/bash
 
+sudo sed -i.bak -e "s%http://jp.archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
+
 sudo apt update
 sudo apt -y upgrade
 
@@ -23,3 +25,11 @@ echo "Input your email: "
 read email_str
 git config --global user.email $email_str
 
+echo "set ssh-key to your github Account"
+
+mkdir ~/atcoder
+
+cp chokudai.sh ~/atcoder
+cp template.cpp ~/atcoder
+
+echo alias ch='sh ./chokudai.sh' >> ~/.bashrc
