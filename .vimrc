@@ -69,4 +69,7 @@ if has("autocmd")
 	autocmd FileType sh          setlocal sw=2 sts=2 ts=2 et
 endif
 
+"正規表現
+nnoremap /  /\v
 
+colorscheme ron
