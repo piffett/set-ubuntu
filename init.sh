@@ -27,7 +27,7 @@ git config --global user.email $email_str
 
 echo "set ssh-key to your github Account"
 
-mkdir ~/atcoder
+mkdir -p ~/atcoder
 
 cp chokudai.sh ~/atcoder
 cp template.cpp ~/atcoder

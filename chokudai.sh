@@ -14,7 +14,7 @@ confirm () {
 }
 
 
-if [ $1 = "set" ]; then
+if [ "$1" = set ]; then
   confirm 'Ready?'
   if [ $? = 0 ]; then
     cp template.cpp a.cpp
@@ -24,11 +24,11 @@ if [ $1 = "set" ]; then
     cp template.cpp e.cpp
     cp template.cpp f.cpp
   fi
-elif [ $1 = "run" ]; then
+elif [ "$1" = run ]; then
   g++ $2.cpp -o tmp
   ./tmp
   rm tmp
-elif [ $1 = "clean" ]; then
+elif [ "$1" = clean ]; then
   confirm 'Ready?'
   if [ $0 = 0 ]; then
     rm a.cpp
@@ -38,4 +38,6 @@ elif [ $1 = "clean" ]; then
     rm e.cpp
     rm f.cpp
   fi
+else
+  echo 'Invalid param' 1>&2
 fi  
