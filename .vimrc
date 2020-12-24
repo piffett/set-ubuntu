@@ -1,75 +1,106 @@
-" かっこ補完
-"
+call plug#begin()
+" Japanese Help
+Plug 'vim-jp/vimdoc-ja'
 
+" fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" vim lsp setting
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+
+" color scheme
+Plug 'chriskempson/base16-vim'
+
+" Customize status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" language
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'mattn/vim-goimports'
+call plug#end()
+
+"""""""""""""""""""""""""""""
+"カッコ補完: { ( [
 inoremap { {}<Left>
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
+inoremap () ()
 inoremap ( ()<ESC>i
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
 inoremap [ []<ESC>i
+inoremap [<Enter> []<Left><CR><ESC><S-o>
 
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
+"補完: ' " <
+inoremap '' ''
+inoremap ' ''<ESC>i
+inoremap "" ""
+inoremap " ""<ESC>i
+inoremap < <><ESC>i
 
-let s:dein_dir = '/home/yasuy/.vim/dein'
-if has('win32') || has('win64')
-  let s:dein_dir = 'C:\Users\yasuy\.vim\dein'
-  set backupdir=~/vimfiles/tmp
-endif
+"インサートモードのままカーソル移動
+inoremap <C-f> <C-g>U<Right>
+inoremap <C-f><C-f> <C-g>U<ESC><S-a>
 
-if has('unix')
-  set runtimepath+=/home/yasuy/.vim/dein/repos/github.com/Shougo/dein.vim
-endif
-if has('win32') || has('win64')
-  set runtimepath+=C:\Users\yasuy\.vim\dein\repos\github.com\Shougo\dein.vim
-endif
+"定義ジャンプ
+noremap <C-b> :LspDefinition<CR>
+"エラー表示
+noremap <F2> :LspDocumentDiagnostics<CR>
 
-" Required:
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
-
-  " Let dein manage dein
-  " Required:
-  "let s:dein_repo_path = s:dein_dir + '/repos/github.com/Shougo/dein.vim'
-  "call dein#add(s:dein_repo_path)
-  call dein#add(s:dein_dir)
-
-  " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('Shougo/denite.nvim')
-
-  " You can specify revision/branch/tag.
-  call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
-
-"End dein Scripts-------------------------
-
-" Required:
+""""""""""""""""""""""""""""""
+set nocompatible
+set backspace=indent,eol,start
+set encoding=utf-8
+set helplang=ja,en
+set number
+set expandtab
+set hlsearch
+set ignorecase
+set incsearch
+set smartcase
+set laststatus=2
+syntax on
+set autoindent
 filetype plugin indent on
-syntax enable
+set showcmd
+set background=dark
+set wildmenu
+set ruler
+set showmatch
+set clipboard+=unnamed
+
+" line number color
+highlight lineNr term=underline ctermfg=11 guifg=Grey
+
+" setting color scheme
+let base16colorspace=256  " Access colors present in 256 colorspace
+set termguicolors
+colorscheme base16-default-dark
+
+" setting status bar
+let g:airline_theme='luna'
+
 
 if has("autocmd")
-	filetype plugin on
-	filetype indent on
-	autocmd FileType c           setlocal sw=4 sts=4 ts=4 noet
-	autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
-	autocmd FileType haskell     setlocal sw=4 sts=4 ts=4 et
-	autocmd FileType js          setlocal sw=4 sts=4 ts=4 et
-	autocmd FileType python      setlocal sw=4 sts=4 ts=4 et
-	autocmd FileType json        setlocal sw=4 sts=4 ts=4 et
-	autocmd FileType cpp         setlocal sw=4 sts=4 ts=4 noet
-	autocmd FileType rb          setlocal sw=2 sts=2 ts=2 et
-	autocmd FileType f           setlocal sw=2 sts=2 ts=2 et
-	autocmd FileType sh          setlocal sw=2 sts=2 ts=2 et
+        filetype plugin on
+        filetype indent on
+        autocmd FileType c           setlocal sw=4 sts=4 ts=4 noet
+        autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
+        autocmd FileType haskell     setlocal sw=4 sts=4 ts=4 et
+        autocmd FileType js          setlocal sw=4 sts=4 ts=4 et
+        autocmd FileType python      setlocal sw=4 sts=4 ts=4 et
+        autocmd FileType json        setlocal sw=4 sts=4 ts=4 et
+        autocmd FileType cpp         setlocal sw=4 sts=4 ts=4 noet
+        autocmd FileType rb          setlocal sw=2 sts=2 ts=2 et
+        autocmd FileType f           setlocal sw=2 sts=2 ts=2 et
+        autocmd FileType sh          setlocal sw=2 sts=2 ts=2 et
+        autocmd FileType go          setlocal sw=2 sts=2 ts=2 et
+        autocmd FileType html        setlocal sw=2 sts=2 ts=2 et
 endif
 
-"正規表現
-nnoremap /  /\v
 
-colorscheme ron
