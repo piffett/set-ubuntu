@@ -36,12 +36,11 @@ inoremap (<Enter> ()<Left><CR><ESC><S-o>
 inoremap [ []<ESC>i
 inoremap [<Enter> []<Left><CR><ESC><S-o>
 
-"補完: ' " <
+"補完: ' "
 inoremap '' ''
 inoremap ' ''<ESC>i
 inoremap "" ""
 inoremap " ""<ESC>i
-inoremap < <><ESC>i
 
 "インサートモードのままカーソル移動
 inoremap <C-f> <C-g>U<Right>
