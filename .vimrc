@@ -26,6 +26,23 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'mattn/vim-goimports'
 call plug#end()
 
+if executable("deno")
+  augroup LspTypeScript
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ "name": "deno lsp",
+    \ "cmd": {server_info -> ["deno", "lsp"]},
+    \ "root_uri": {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), "tsconfig.json"))},
+    \ "allowlist": ["typescript", "typescript.tsx"],
+    \ "initialization_options": {
+    \     "enable": v:true,
+    \     "lint": v:true,
+    \     "unstable": v:true,
+    \   },
+    \ })
+  augroup END
+endif
+
 """""""""""""""""""""""""""""
 "カッコ補完: { ( [
 inoremap { {}<Left>
@@ -100,6 +117,7 @@ if has("autocmd")
         autocmd FileType sh          setlocal sw=2 sts=2 ts=2 et
         autocmd FileType go          setlocal sw=2 sts=2 ts=2 et
         autocmd FileType html        setlocal sw=2 sts=2 ts=2 et
+        autocmd FileType ts          setlocal sw=2 sts=2 ts=2 et
 endif
 
 
