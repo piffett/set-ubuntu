@@ -24,24 +24,13 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'mattn/vim-goimports'
-call plug#end()
+Plug 'mattn/emmet-vim'
+Plug 'rust-lang/rust.vim'
+Plug 'vim-denops/denops.vim'
 
-if executable("deno")
-  augroup LspTypeScript
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ "name": "deno lsp",
-    \ "cmd": {server_info -> ["deno", "lsp"]},
-    \ "root_uri": {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), "tsconfig.json"))},
-    \ "allowlist": ["typescript", "typescript.tsx"],
-    \ "initialization_options": {
-    \     "enable": v:true,
-    \     "lint": v:true,
-    \     "unstable": v:true,
-    \   },
-    \ })
-  augroup END
-endif
+" html close tag
+Plug 'alvan/vim-closetag'
+call plug#end()
 
 """""""""""""""""""""""""""""
 "カッコ補完: { ( [
@@ -79,7 +68,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set smartcase
-set laststatus=2
+set laststatus=4
 syntax on
 set autoindent
 filetype plugin indent on
@@ -101,6 +90,8 @@ colorscheme base16-default-dark
 " setting status bar
 let g:airline_theme='luna'
 
+set tabstop=2
+set shiftwidth=2
 
 if has("autocmd")
         filetype plugin on
@@ -108,7 +99,7 @@ if has("autocmd")
         autocmd FileType c           setlocal sw=4 sts=4 ts=4 noet
         autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
         autocmd FileType haskell     setlocal sw=4 sts=4 ts=4 et
-        autocmd FileType js          setlocal sw=4 sts=4 ts=4 et
+        autocmd FileType js          setlocal sw=2 sts=2 ts=2 et
         autocmd FileType python      setlocal sw=4 sts=4 ts=4 et
         autocmd FileType json        setlocal sw=4 sts=4 ts=4 et
         autocmd FileType cpp         setlocal sw=4 sts=4 ts=4 noet
